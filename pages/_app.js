@@ -1,4 +1,3 @@
-import "../styles/globals.css";
 import "../css/index.css";
 import { QueryClientProvider, QueryCache, QueryClient } from "react-query";
 import { Hydrate } from "react-query/hydration";

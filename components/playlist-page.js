@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Track from "./track";
 import { getPlaylist, getPlaylistTracks } from "../services/playlist";
+import PlaylistHero from "./playlist-hero";
 
 export default function PlaylistPage() {
   const [playlist, setPlaylist] = useState({});
@@ -21,19 +22,21 @@ export default function PlaylistPage() {
   console.log(tracks);
   return (
     <>
-      <section
-        className="cover-artist"
-        alt="Cover del artista"
-        aria-label=""
-      ></section>
+      <PlaylistHero {...playlist} />
 
-      <div className="nameArtist">
-        <h1 className="nameArtist-title">This is Bad Bunny</h1>
-        <p className="nameArtist-name">Bad Bunny</p>
-        <p className="nameArtist-followers">2,611,830 SEGUIDORES</p>
-        <button className="nameArtist-button" id="button-random">
-          Aleatorio
-        </button>
+      <div className="listSong-artist">
+        {/* <div className="filter-song">
+        <i className="icon-search"></i>
+        <p>Filtrar</p>
+      </div> */}
+        <div className="song title">
+          <div className="spacio-hidden"></div>
+          <p className="name-song">Titulo</p>
+          <p className="name-artist">Artista</p>
+          <p className="album">album</p>
+          <p className="date-song">Date</p>
+          <p className="time-song">Time</p>
+        </div>
       </div>
     </>
   );

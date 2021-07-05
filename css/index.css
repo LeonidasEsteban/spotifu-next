@@ -9,7 +9,8 @@
 @import './page.css';
 @import './layout.css';
 @import './scrollbar.css';
-@import './playlisy-page.css';
+@import './playlist-page.css';
+@import './playlist-hero.css';
 
 :root {
   font-size: 14px;
