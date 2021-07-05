@@ -5,11 +5,16 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "deploy": "vercel --prod"
   },
   "dependencies": {
     "next": "11.0.1",
+    "next-fonts": "^1.5.1",
+    "node-serialize": "^0.0.4",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-query": "^3.18.1",
+    "universal-cookie": "^4.0.4"
   }
 }

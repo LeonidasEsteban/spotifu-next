@@ -1,13 +1,12 @@
-import Home from '../components/home'
 import Base from '../components/base'
 import Header from '../components/header'
 
-export default function HomePage() {
+export default function Home() {
   return (
     <Base>
       <>
-        <Header />
-        <Home />
+        <Header/>
+        library
       </>
     </Base>
   )
