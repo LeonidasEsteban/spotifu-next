@@ -17,7 +17,7 @@ export default function PlaylistPage() {
     console.log('playlist', dataPlaylist, 'tracks', dataTracks)
     setPlaylist(dataPlaylist)
     setTracks(dataTracks.tracks.items)
-  }, [])
+  }, [router.query.id])
 
 
 

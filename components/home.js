@@ -1,16 +1,11 @@
 import React from 'react'
-import Link from 'next/link'
-import { useEffect, useState } from 'react'
 import { getPlaylistList } from '../services/playlist'
+import { useQuery } from 'react-query'
+import PlaylistItemB from '../components/playlist-b'
 
 export default function Home() {
-  const [playlist, setPlaylist] = useState([])
-  useEffect(async () => {
-    const data = await getPlaylistList()
-    if(!data.error) {
-      setPlaylist(data.items)
-    }
-  }, [])
+  const { data, isFetched } = useQuery('playlistList', getPlaylistList)
+
   return (
       <main className="page-block">
         <section className="playlistList" aria-labelledby="region1">
@@ -18,30 +13,22 @@ export default function Home() {
             <h2 className="playlistList-title" id="region1">
               Buenas noches
             </h2>
-
           </div>
           <div className="playlistList-container">
             {
-              playlist.map((playlist) => (
-                <div className="playlistB" key={playlist.id}>
-                  <div className="playlistB-cover">
-                    <img src={playlist.images[0].url} width="76" height="76" alt="Cover de la playlist Anime Hits" />
-                  </div>
-                  <div className="playlistB-details">
-                    <h3 className="playlistB-title">{playlist.name}</h3>
-                    <div className="playlistB-control">
-                      <Link href={`/playlist/[id]`} as={`/playlist/${playlist.id}`}>
-                        <a className="buttonIcon is-primary" title="Reproducir la lista de reproducción Naruto Openings & Endings"
-                          aria-label="Reproducir la lista de reproducción Naruto Openings & Endings">
-                          <i className="icon-play" aria-hidden="true"></i>
-                        </a>
-                      </Link>
-                    </div>
-                  </div>
-                </div>
-              ))
+              isFetched ? data.items.map(({ images, id, name }) => (
+                <PlaylistItemB
+                  image={images[0].url}
+                  id={id}
+                  name={name}
+                />
+              )) : (
+                <PlaylistItemB
+                  id="loading"
+                  name="Cargando.."
+                />
+              )
             }
-
           </div>
         </section>
 

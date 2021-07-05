@@ -1,14 +1,26 @@
 import React from 'react'
+import { useQuery } from 'react-query'
+import { getPlaylistList } from '../services/playlist'
+import Link from 'next/link'
 
-export default function list({ items = [], title = '', id }) {
+export default function list() {
+  const { data, isFetching } = useQuery('playlistList', getPlaylistList)
+  // console.log(playlistListQuery)
+  if (isFetching) return (
+    <nav className="list">
+      <p>Cargando...</p>
+    </nav>
+  )
   return (
-    <nav className="list" aria-labelledby={id}>
-      <h2 className="list-title" id={id}>{title}</h2>
+    <nav className="list" aria-labelledby="Playlist">
+      <h2 className="list-title" id="Playlist">Playlist</h2>
       <ul className="list-content">
         {
-          items.map(item => (
-            <li className="list-item" key={item.title}>
-              <a href={item.link} className="link">{item.title}</a>
+          data.items.map(playlist => (
+            <li className="list-item" key={playlist.id}>
+              <Link href={`/playlist/[id]`} as={`/playlist/${playlist.id}`}>
+                <a className="link">{playlist.name}</a>
+              </Link>
             </li>
           ))
         }
