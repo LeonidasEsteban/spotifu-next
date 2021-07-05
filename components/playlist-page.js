@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Track from "./track";
 import { getPlaylist, getPlaylistTracks } from "../services/playlist";
 import PlaylistHero from "./playlist-hero";
+import PlaylistTable from "./playlist-table";
 
 export default function PlaylistPage() {
   const [playlist, setPlaylist] = useState({});
@@ -11,33 +12,22 @@ export default function PlaylistPage() {
 
   const router = useRouter();
   useEffect(async () => {
-    console.log(router);
     const playlistId = router.query.id;
     const dataPlaylist = await getPlaylist(playlistId);
-    const dataTracks = await getPlaylist(playlistId);
-    console.log("playlist", dataPlaylist, "tracks", dataTracks);
+    const dataTracks = await getPlaylistTracks(playlistId);
     setPlaylist(dataPlaylist);
-    setTracks(dataTracks.tracks.items);
+    setTracks(dataTracks.items);
   }, [router.query.id]);
-  console.log(tracks);
   return (
     <>
       <PlaylistHero {...playlist} />
-
-      <div className="listSong-artist">
-        {/* <div className="filter-song">
-        <i className="icon-search"></i>
-        <p>Filtrar</p>
-      </div> */}
-        <div className="song title">
-          <div className="spacio-hidden"></div>
-          <p className="name-song">Titulo</p>
-          <p className="name-artist">Artista</p>
-          <p className="album">album</p>
-          <p className="date-song">Date</p>
-          <p className="time-song">Time</p>
-        </div>
-      </div>
+      <PlaylistTable>
+        {
+          tracks.map((track, index) => (
+            <Track {...track} index={index + 1} />
+          ))
+        }
+      </PlaylistTable>
     </>
   );
 }

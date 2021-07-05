@@ -1,0 +1,46 @@
+.playlistItem {
+  align-items: center;
+  display: grid;
+  grid-template-columns: 30px 1fr 1fr 1fr 80px;
+  gap: 1rem;
+  padding-block: .5rem;
+}
+
+.playlistItem p {
+  margin: 0;
+}
+
+.playlistItem:hover {
+  background-color: rgba(255,255,255,.1);
+  border-radius: .25rem;
+  cursor: pointer;
+}
+
+.playlistItem-index {
+  inline-size: 30px;
+  text-align: end;
+}
+
+.playlistItem-description {
+  flex: 1;
+}
+
+.playlistItem-name {
+  color: var(--white);
+  margin: 0;
+}
+
+.playlistItem-artist {
+  margin: 0;
+}
+
+.playlistItem-title {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.playlistItem img {
+  inline-size: 2.5rem;
+  block-size: 2.5rem;
+}

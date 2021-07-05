@@ -7,7 +7,7 @@ export default function PlaylistB({
   id,
 }) {
   return (
-    <div className="playlistB" key={id}>
+    <div className="playlistB">
       <div className="playlistB-cover">
         <img
           src={image}

@@ -1,7 +1,6 @@
 import React from 'react'
 
-export default function PlaylistHero({ name = '', description, type, images = [],...props}) {
-  console.log(props)
+export default function PlaylistHero({ name = '', description, type, images = [{url: ''}],...props}) {
   return (
     <div className="playlistHero">
       <img src={images[0].url} alt="" width="232" height="232" />

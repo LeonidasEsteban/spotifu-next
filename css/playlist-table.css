@@ -1,0 +1,14 @@
+.playlistTable {
+  padding-block: 1.5rem;
+}
+
+.playlistTable-head {
+  display: grid;
+  grid-template-columns: 30px 1fr 1fr 1fr 80px;
+  gap: 1rem;
+  border-bottom: 1px solid rgb(255,255,255,.1);
+}
+
+.playlistTable-index {
+  justify-self: end;
+}

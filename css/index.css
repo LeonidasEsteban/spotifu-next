@@ -11,6 +11,8 @@
 @import './scrollbar.css';
 @import './playlist-page.css';
 @import './playlist-hero.css';
+@import './playlist-item.css';
+@import './playlist-table.css';
 
 :root {
   font-size: 14px;
