@@ -6,10 +6,10 @@ import { getPlaylistList } from '../services/playlist'
 export default function Home() {
   const [playlist, setPlaylist] = useState([])
   useEffect(async () => {
-      const data = await getPlaylistList()
-      if(!data.error) {
-        setPlaylist(data.items)
-      }
+    const data = await getPlaylistList()
+    if(!data.error) {
+      setPlaylist(data.items)
+    }
   }, [])
   return (
       <main className="page-block">
