@@ -4,7 +4,7 @@ const cookies = new Cookies();
 
 export async function getPlaylistList() {
   //cambie la ruta del fetch de ${BASE_API}me/playlists  a ${BASE_API}users/me/playlists
-  const response = await fetch(` ${BASE_API}users/me/playlists`, {
+  const response = await fetch(`${BASE_API}me/playlists`, {
     headers: {
       Authorization: cookies.get("token"),
     },
