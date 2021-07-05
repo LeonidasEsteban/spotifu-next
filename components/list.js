@@ -2,11 +2,11 @@ import React from 'react'
 import { useQuery } from 'react-query'
 import { getPlaylistList } from '../services/playlist'
 import Link from 'next/link'
+import withLogging from '../hoc/with-logging'
 
-export default function list() {
-  const { data, isFetching, isFetched } = useQuery('playlistList', getPlaylistList)
-  // console.log(playlistListQuery)
-  // if (isError) return null
+
+function list() {
+  const { data, isFetched } = useQuery('playlistList', getPlaylistList)
   if (!isFetched) return (
     <nav className="list">
       <p>Cargando...</p>
@@ -29,3 +29,5 @@ export default function list() {
     </nav>
   )
 }
+
+export default withLogging(list)
