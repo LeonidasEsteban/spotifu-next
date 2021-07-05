@@ -3,8 +3,9 @@ import { getPlaylistList } from "../services/playlist";
 import { useQuery } from "react-query";
 import PlaylistItemB from "../components/playlist-b";
 import Skeleton from "../components/skeletonB";
+import withLogging from "../hoc/with-logging";
 
-export default function Home() {
+function Home() {
   const { data, isFetched } = useQuery("playlistList", getPlaylistList);
   return (
     <main className="page-block">
@@ -868,3 +869,5 @@ export default function Home() {
     </main>
   );
 }
+
+export default withLogging(Home);

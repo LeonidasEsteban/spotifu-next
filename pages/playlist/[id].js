@@ -2,6 +2,7 @@ import React from 'react'
 import Page from '../../components/playlist-page'
 import { createContext, useState } from 'react'
 import Base from '../../components/base'
+import Header from '../../components/header'
 
 export const TrackContext = createContext({})
 
@@ -11,6 +12,7 @@ export default function Playlist() {
   return (
     <TrackContext.Provider value={{value:track, setTrack}}>
       <Base>
+        <Header />
         <Page />
       </Base>
     </TrackContext.Provider>
