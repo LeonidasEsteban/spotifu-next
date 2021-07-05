@@ -21,6 +21,7 @@ export default function Home() {
                   image={images[0].url}
                   id={id}
                   name={name}
+                  key={id}
                 />
               )) : (
                 <PlaylistItemB

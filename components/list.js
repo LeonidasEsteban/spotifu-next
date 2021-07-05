@@ -4,9 +4,10 @@ import { getPlaylistList } from '../services/playlist'
 import Link from 'next/link'
 
 export default function list() {
-  const { data, isFetching } = useQuery('playlistList', getPlaylistList)
+  const { data, isFetching, isFetched } = useQuery('playlistList', getPlaylistList)
   // console.log(playlistListQuery)
-  if (isFetching) return (
+  // if (isError) return null
+  if (!isFetched) return (
     <nav className="list">
       <p>Cargando...</p>
     </nav>
