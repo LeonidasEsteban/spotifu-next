@@ -1,14 +1,16 @@
 import React from "react";
-import Link from "next/link";
 
-export default function PlaylistB({
-  image = "images/grand-scape.png",
-  name,
-  id,
-}) {
+export default function SkeletonB({ id }) {
   return (
     <div className="playlistB" key={id}>
-      <div className="playlistB-cover">
+      <img
+        src="images/skeletonB.png"
+        alt="skeleton image"
+        width="315"
+        height="85.5"
+        style={{ opacity: 0.5, objectFit: "cover" }}
+      />
+      {/* <div className="playlistB-cover">
         <img
           src={image}
           width="76"
@@ -29,7 +31,7 @@ export default function PlaylistB({
             </a>
           </Link>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }
