@@ -5,24 +5,50 @@
 .search-artist {
   display: flex;
   gap: 3rem;
+  flex-wrap: wrap;
 }
 
 .search-artist-image {
   width: 200px;
   height: 200px;
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .search-artist-container {
   background: #1a1919;
-  max-width: 400px;
-  flex: 1;
+  width: 400px;
+  /* flex: 1; */
   padding: 1rem;
   border-radius: 8px;
+  position: relative;
+}
+.search-artist-container .buttonIcon {
+  opacity: 0;
+  position: absolute;
+  bottom: 0rem;
+  right: 2rem;
+}
+
+.search-artist-container:hover .buttonIcon {
+  animation-name: button;
+  animation-duration: 300ms;
+  animation-fill-mode: forwards;
+  opacity: 1;
+}
+
+@keyframes button {
+  0% {
+  }
+  100% {
+    bottom: 2rem;
+    right: 2rem;
+  }
 }
 
 .search-artist-container:hover {
   background: #242424;
+  /* opacity: 1; */
 }
 
 .search-name-artist {
@@ -50,9 +76,10 @@
 }
 
 .search-track-container {
-  height: 300px;
+  /* max-height: 800px; */
   overflow: auto;
-  flex: 1;
+  margin-top: 1rem;
+  /* flex: 1; */
 }
 
 .search-track-content {
@@ -62,6 +89,7 @@
   height: 40px;
   margin-bottom: 0.8rem;
   overflow: hidden;
+  flex: 1;
 }
 
 .search-track-content p {
