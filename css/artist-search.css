@@ -1,0 +1,124 @@
+.artist-collaboration {
+  display: inline-block;
+}
+
+.search-artist {
+  display: flex;
+  gap: 3rem;
+  flex-wrap: wrap;
+}
+
+.search-artist-image {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.search-artist-container {
+  background: #1a1919;
+  width: 400px;
+  /* flex: 1; */
+  padding: 1rem;
+  border-radius: 8px;
+  position: relative;
+}
+.search-artist-container .buttonIcon {
+  opacity: 0;
+  position: absolute;
+  bottom: 0rem;
+  right: 2rem;
+}
+
+.search-artist-container:hover .buttonIcon {
+  animation-name: button;
+  animation-duration: 300ms;
+  animation-fill-mode: forwards;
+  opacity: 1;
+}
+
+@keyframes button {
+  0% {
+  }
+  100% {
+    bottom: 2rem;
+    right: 2rem;
+  }
+}
+
+.search-artist-container:hover {
+  background: #242424;
+  /* opacity: 1; */
+}
+
+.search-name-artist {
+  margin: 0.5rem 0;
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 36px;
+  color: white;
+  text-transform: none;
+}
+
+.search-artist-type {
+  background-color: rgb(27, 27, 27);
+  color: white;
+  text-transform: uppercase;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.search-artist-type:active {
+  transform: scale(0.99);
+}
+
+.search-track-container {
+  /* max-height: 800px; */
+  overflow: auto;
+  margin-top: 1rem;
+  /* flex: 1; */
+}
+
+.search-track-content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  height: 40px;
+  margin-bottom: 0.8rem;
+  overflow: hidden;
+  flex: 1;
+}
+
+.search-track-content p {
+  margin: 0;
+}
+
+.search-track-artists {
+}
+.search-track-artists div {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.search-track-name {
+  display: flex;
+  gap: 0.8rem;
+}
+.search-track-name img {
+  width: 40px;
+  height: inherit;
+}
+
+.search-track-nameSong {
+  color: white;
+}
+
+.search-track-nameArtists {
+  color: #b3b3b3;
+  font-size: 14px;
+  line-height: 1rem;
+  font-weight: 400;
+}
