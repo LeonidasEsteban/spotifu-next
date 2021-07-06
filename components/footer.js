@@ -1,17 +1,47 @@
-import React, {useContext} from 'react'
+import React, {useContext, useRef, useEffect, useState } from 'react'
 import { TrackContext } from '../pages/playlist/[id]'
 
 export default function Footer() {
+  const audio = useRef(null)
+  const [isPlaying, setIsPlaying] = useState(false)
+
   const track = useContext(TrackContext)
   console.log('foooter', track.value)
+  function handlePauseClick() {
+    audio.current.pause()
+  }
+  function handlePlayClick() {
+    audio.current.play()
+  }
+  function handlePlay() {
+    setIsPlaying(true)
+  }
+  function handlePause() {
+    setIsPlaying(false)
+  }
+
+  useEffect(() => {
+    if (track?.value?.preview_url) {
+      audio.current = new Audio(track?.value?.preview_url)
+      audio.current.addEventListener('play', handlePlay)
+      audio.current.addEventListener('pause', handlePause)
+      audio.current.play()
+    }
+
+    return () => {
+      if (audio.current) {
+        audio.current.pause()
+      }
+    }
+  }, [track])
   if (!track?.value?.preview_url) return null
   return (
     <footer>
       <div className="player">
-        {
+        {/* {
           track?.value?.preview_url ?
-          <audio src={track.value.preview_url} autoPlay></audio> : null
-        }
+          <audio ref={audio} src={track.value.preview_url} autoPlay></audio> : null
+        } */}
         <div className="player-nowPlaying">
           <div className="nowPlaying">
             <div className="nowPlaying-cover">
@@ -43,9 +73,19 @@ export default function Footer() {
               <button className="buttonIcon" aria-label="Anterior" title="Anterior">
                 <i className="icon-prev" aria-hidden="true"></i>
               </button>
-              <button className="buttonIcon is-white" aria-label="Reproducir" title="Reproducir">
-                <i className="icon-play" aria-hidden="true"></i>
-              </button>
+              {
+                isPlaying ? (
+                  <button onClick={handlePauseClick} className="buttonIcon is-white" aria-label="Pause" title="Reproducir">
+                    <i className="icon-pause" aria-hidden="true"></i>
+                  </button>
+                ) : (
+                  <button onClick={handlePlayClick} className="buttonIcon is-white" aria-label="Reproducir" title="Reproducir">
+                    <i className="icon-play" aria-hidden="true"></i>
+                  </button>
+                )
+              }
+
+
               <button className="buttonIcon" aria-label="Siguiente" title="Siguiente">
                 <i className="icon-next" aria-hidden="true"></i>
               </button>
