@@ -1,15 +1,16 @@
-import React, { useContext } from "react";
-import { getTrack } from "../services/track";
-import { TrackContext } from "../pages/playlist/[id]";
-import timeFormater from "../utils/time-formater";
+import React, { useContext } from 'react'
+import { getTrack } from '../services/track'
+import { TrackContext } from '../pages/playlist/[id]'
+import timeFormater from '../utils/time-formater'
 
 export default function track({
-  track: { id, name, artists, album, duration_ms, added_at, preview_url }, index
+  track: { id, name, artists, album, duration_ms, added_at, preview_url },
+  index,
 }) {
-  const trackContext = useContext(TrackContext);
+  const trackContext = useContext(TrackContext)
   async function handleTrackClick() {
-    const track = await getTrack(id);
-    trackContext.setTrack(track);
+    const track = await getTrack(id)
+    trackContext.setTrack(track)
   }
 
   {
@@ -27,6 +28,6 @@ export default function track({
         <p className="playlistItem-date">{album.release_date}</p>
         <p className="playlistItem-time">{timeFormater(duration_ms)}</p>
       </div>
-    ) : null;
+    ) : null
   }
 }
