@@ -1,15 +1,70 @@
 import React, {useContext, useRef, useEffect, useState } from 'react'
-import { TrackContext } from '../pages/playlist/[id]'
+import { TrackContext } from '../pages/_app'
 import timeFormater from '../utils/time-formater'
+import Slider from './slider'
+
+
+import { useQuery } from 'react-query'
+import { getShow } from '../services/show'
+import { getPlaylist } from '../services/playlist'
+
+function usePlaylist(type, id) {
+  switch(type) {
+    case 'music':
+      return {
+        playlist: useQuery(id, () => getPlaylist(id)),
+        items: 'tracks',
+        audioSrc: 'preview_url',
+      }
+    case 'show':
+      return {
+        playlist: useQuery(id, () => getShow(id)),
+        items: 'episodes',
+        audioSrc: 'audio_preview_url',
+      }
+    default:
+      return {
+        playlist: useQuery(id, () => getShow(id)),
+        items: 'episodes',
+        audioSrc: 'audio_preview_url',
+      }
+
+  }
+}
 
 export default function Footer() {
   const track = useContext(TrackContext)
-  if (!track?.value?.preview_url) return null
+  if (!track?.value) return null
+  const { playlist, audioSrc, items } = usePlaylist(track.value.type, track.value.id)
+  const audio_url = (audioSrc === 'preview_url') ? playlist?.data?.[items]?.items?.[track.value.start]?.track[audioSrc] : playlist?.data?.[items]?.items?.[track.value.start]?.[audioSrc]
   const audio = useRef(null)
   const [isPlaying, setIsPlaying] = useState(false)
   const [progressTime, setProgressTime] = useState(timeFormater(0))
   const [progressPercentage, setProgressPercentage] = useState('0%')
   const [duration, setDuration] = useState(timeFormater(0))
+
+  useEffect(() => {
+    if (audio_url) {
+      audio.current = new Audio(audio_url)
+      audio.current.addEventListener('play', handlePlay)
+      audio.current.addEventListener('pause', handlePause)
+      audio.current.addEventListener('loadedmetadata', handleLoadedMetaData)
+      audio.current.addEventListener('timeupdate', handleTimeUpdate)
+      audio.current.addEventListener('ended', handleEnded)
+      audio.current.play()
+    }
+
+    return () => {
+      if (audio.current) {
+        audio.current.pause()
+        audio.current.removeEventListener('play', handlePlay)
+        audio.current.removeEventListener('pause', handlePause)
+        audio.current.removeEventListener('timeupdate', handleTimeUpdate)
+      }
+    }
+  }, [audio_url])
+
+  if (!audio_url) return null
 
   function handlePauseClick() {
     audio.current.pause()
@@ -35,25 +90,10 @@ export default function Footer() {
     setProgressPercentage(`${percentage}%`)
   }
 
-  useEffect(() => {
-    if (track?.value?.preview_url) {
-      audio.current = new Audio(track?.value?.preview_url)
-      audio.current.addEventListener('play', handlePlay)
-      audio.current.addEventListener('pause', handlePause)
-      audio.current.addEventListener('loadedmetadata', handleLoadedMetaData)
-      audio.current.addEventListener('timeupdate', handleTimeUpdate)
-      audio.current.play()
-    }
-
-    return () => {
-      if (audio.current) {
-        audio.current.pause()
-        audio.current.removeEventListener('play', handlePlay)
-        audio.current.removeEventListener('pause', handlePause)
-        audio.current.removeEventListener('timeupdate', handleTimeUpdate)
-      }
-    }
-  }, [track])
+  function handleEnded() {
+    setProgressPercentage('0%')
+    setProgressTime(timeFormater(0))
+  }
 
   return (
     <footer>
@@ -65,17 +105,17 @@ export default function Footer() {
         <div className="player-nowPlaying">
           <div className="nowPlaying">
             <div className="nowPlaying-cover">
-              <img src={track.value.album.images[0].url} width="56" height="56"
+              {/* <img src={track.value.album.images[0].url} width="56" height="56"
                 alt="Portada de Grand Escape (feat. Tokio Miura) de RADWIMPS, Toko Miura"
-                title="Portada de Grand Escape (feat. Tokio Miura) de RADWIMPS, Toko Miura" />
+                title="Portada de Grand Escape (feat. Tokio Miura) de RADWIMPS, Toko Miura" /> */}
             </div>
             <div className="nowPlaying-details">
               <div className="nowPlaying-description">
                 <a href="#song" className="nowPlaying-title">
-                  {track.value.name}
+                  {/* {track.value.name} */}
                 </a>
                 <a href="#RADWIMPS" className="nowPlaying-artist">
-                  {track.value.artists[0].name}
+                  {/* {track.value.artists[0].name} */}
                 </a>
               </div>
               <div className="nowPlaying-actions">
@@ -113,11 +153,7 @@ export default function Footer() {
             <div className="playerPlayback">
               <span className="playerPlayback-progressTime">{progressTime}</span>
               <div className="playerPlayback-slider">
-                <div className="slider">
-                  <div className="slider-progress" style={{inlineSize: progressPercentage}}>
-                    <button className="slider-buttton" aria-label="Controlar el progreso de la reproducción"></button>
-                  </div>
-                </div>
+                <Slider />
               </div>
               <span className="playerPlayback-progressTime">{duration}</span>
             </div>
