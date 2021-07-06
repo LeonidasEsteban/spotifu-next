@@ -22,14 +22,14 @@ export default function Playlist() {
       <Header />
       <PlaylistHero
         name={show?.name}
-        image={show?.images[0]?.url}
+        image={show?.images?.[0]?.url}
         description={show?.description}
         type={show?.type}
       />
       <PlaylistTable>
         {
           isFetched ?
-            show.episodes.items.map((track, index) => (
+            show?.episodes?.items.map((track, index) => (
               <Track
                 name={track.name}
                 image={track?.images[0]?.url}
