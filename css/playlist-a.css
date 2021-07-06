@@ -6,8 +6,12 @@
   background: var(--gray40);
   box-sizing: border-box;
   transition: .3s background;
+  position: relative;
 }
-
+.playlistA-overlayLink {
+  position: absolute;
+  inset: 0;
+}
 .playlistA:hover, .playlistA:focus-within  {
   cursor: pointer;
   background: var(--gray30);
@@ -47,6 +51,9 @@
   font: var(--baseFontBold);
   color: var(--white);
   margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .playlistA-description {

@@ -7,43 +7,37 @@ import PlaylistHero from "../../components/playlist-hero";
 import PlaylistTable from "../../components/playlist-table";
 import { useQuery } from "react-query";
 import Track from "../../components/track";
-import { getPlaylist, getPlaylistTracks } from "../../services/playlist";
-
+import { getShow } from "../../services/show";
 
 
 export default function Playlist() {
-
   const router = useRouter();
-  const playlistId = router.query.id;
-  const { data: playlist } = useQuery(router.query.id, () => getPlaylist(playlistId))
-  const { data: tracks, isFetched } = useQuery(router.query.id, () => getPlaylistTracks(playlistId))
-  console.log(tracks)
+  const showId = router.query.id;
+  const { data: show, isFetched } = useQuery(router.query.id, () => getShow(showId))
   return (
     <Base>
       <Head>
-        <title>{playlist?.name}</title>
+        <title>{show?.name}</title>
       </Head>
       <Header />
       <PlaylistHero
-        name={playlist?.name}
-        image={playlist?.images[0]?.url}
-        description={playlist?.description}
-        type={playlist?.type}
+        name={show?.name}
+        image={show?.images[0]?.url}
+        description={show?.description}
+        type={show?.type}
       />
       <PlaylistTable>
         {
           isFetched ?
-            tracks.tracks.items.map((track, index) => (
+            show.episodes.items.map((track, index) => (
               <Track
-                {...track.track}
-                image={track?.track?.album?.images[0].url}
-                artist={track.track.artists?.[0].name}
-                album={track.track.album.name}
-                key={track.track.id}
-                date={track.added_at}
+                name={track.name}
+                image={track?.images[0]?.url}
+                preview_url={track.audio_preview_url}
+                type="show"
+                groupId={show?.id}
+                key={track.id}
                 index={index + 1}
-                groupId={playlist.id}
-                type="music"
               />
             ))
             : 'cargando...'

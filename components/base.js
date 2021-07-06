@@ -6,7 +6,6 @@ import Logo from "../components/logo";
 import Menu from "../components/menu";
 import List from "../components/list";
 import Footer from "../components/footer";
-import Header from "../components/header";
 
 export default function Base({ children }) {
   return (
@@ -15,7 +14,7 @@ export default function Base({ children }) {
         <Sidebar>
           <Logo />
           <Menu />
-          <List items={[]} title="Playlist" id="playlist-navigation" />
+          <List />
         </Sidebar>
         <div className="page">{children}</div>
         <Footer />

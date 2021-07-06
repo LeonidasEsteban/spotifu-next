@@ -1,7 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
 export default (req, res) => {
-  const scopes = 'user-read-private user-read-email user-top-read playlist-read-private';
+  const scopes = 'user-read-private user-read-email user-top-read playlist-read-private user-library-read';
   res.redirect('https://accounts.spotify.com/authorize' +
     '?response_type=code' +
     '&client_id=' + process.env.CLIENT_ID +
