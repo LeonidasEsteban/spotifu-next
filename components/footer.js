@@ -8,9 +8,9 @@ export default function Footer() {
   const audio = useRef(null)
   const [isPlaying, setIsPlaying] = useState(false)
   const [progressTime, setProgressTime] = useState(timeFormater(0))
-  const duration = timeFormater(track.value.duration_ms)
+  const [progressPercentage, setProgressPercentage] = useState('0%')
+  const [duration, setDuration] = useState(timeFormater(0))
 
-  console.log('foooter', track.value)
   function handlePauseClick() {
     audio.current.pause()
   }
@@ -24,9 +24,15 @@ export default function Footer() {
     setIsPlaying(false)
   }
 
+  function handleLoadedMetaData() {
+    setDuration(timeFormater(audio.current.duration * 1000))
+  }
+
 
   function handleTimeUpdate() {
     setProgressTime(timeFormater(audio.current.currentTime * 1000))
+    const percentage = audio.current.currentTime * 100 / audio.current.duration
+    setProgressPercentage(`${percentage}%`)
   }
 
   useEffect(() => {
@@ -34,6 +40,7 @@ export default function Footer() {
       audio.current = new Audio(track?.value?.preview_url)
       audio.current.addEventListener('play', handlePlay)
       audio.current.addEventListener('pause', handlePause)
+      audio.current.addEventListener('loadedmetadata', handleLoadedMetaData)
       audio.current.addEventListener('timeupdate', handleTimeUpdate)
       audio.current.play()
     }
@@ -107,7 +114,7 @@ export default function Footer() {
               <span className="playerPlayback-progressTime">{progressTime}</span>
               <div className="playerPlayback-slider">
                 <div className="slider">
-                  <div className="slider-progress">
+                  <div className="slider-progress" style={{inlineSize: progressPercentage}}>
                     <button className="slider-buttton" aria-label="Controlar el progreso de la reproducción"></button>
                   </div>
                 </div>
