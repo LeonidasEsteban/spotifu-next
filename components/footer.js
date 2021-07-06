@@ -1,11 +1,15 @@
 import React, {useContext, useRef, useEffect, useState } from 'react'
 import { TrackContext } from '../pages/playlist/[id]'
+import timeFormater from '../utils/time-formater'
 
 export default function Footer() {
+  const track = useContext(TrackContext)
+  if (!track?.value?.preview_url) return null
   const audio = useRef(null)
   const [isPlaying, setIsPlaying] = useState(false)
+  const [progressTime, setProgressTime] = useState(timeFormater(0))
+  const duration = timeFormater(track.value.duration_ms)
 
-  const track = useContext(TrackContext)
   console.log('foooter', track.value)
   function handlePauseClick() {
     audio.current.pause()
@@ -20,21 +24,30 @@ export default function Footer() {
     setIsPlaying(false)
   }
 
+
+  function handleTimeUpdate() {
+    setProgressTime(timeFormater(audio.current.currentTime * 1000))
+  }
+
   useEffect(() => {
     if (track?.value?.preview_url) {
       audio.current = new Audio(track?.value?.preview_url)
       audio.current.addEventListener('play', handlePlay)
       audio.current.addEventListener('pause', handlePause)
+      audio.current.addEventListener('timeupdate', handleTimeUpdate)
       audio.current.play()
     }
 
     return () => {
       if (audio.current) {
         audio.current.pause()
+        audio.current.removeEventListener('play', handlePlay)
+        audio.current.removeEventListener('pause', handlePause)
+        audio.current.removeEventListener('timeupdate', handleTimeUpdate)
       }
     }
   }, [track])
-  if (!track?.value?.preview_url) return null
+
   return (
     <footer>
       <div className="player">
@@ -91,7 +104,7 @@ export default function Footer() {
               </button>
             </div>
             <div className="playerPlayback">
-              <span className="playerPlayback-progressTime">01:40</span>
+              <span className="playerPlayback-progressTime">{progressTime}</span>
               <div className="playerPlayback-slider">
                 <div className="slider">
                   <div className="slider-progress">
@@ -99,7 +112,7 @@ export default function Footer() {
                   </div>
                 </div>
               </div>
-              <span className="playerPlayback-progressTime">01:40</span>
+              <span className="playerPlayback-progressTime">{duration}</span>
             </div>
           </div>
         </div>
