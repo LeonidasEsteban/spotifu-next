@@ -1,12 +1,12 @@
-import React from "react";
-import { getPlaylistList } from "../services/playlist";
-import { useQuery } from "react-query";
-import PlaylistItemB from "../components/playlist-b";
-import Skeleton from "../components/skeletonB";
-import withLogging from "../hoc/with-logging";
+import React from 'react'
+import { getPlaylistList } from '../services/playlist'
+import { useQuery } from 'react-query'
+import PlaylistItemB from '../components/playlist-b'
+import Skeleton from '../components/skeletonB'
+import withLogging from '../hoc/with-logging'
 
 function Home() {
-  const { data, isFetched } = useQuery("playlistList", getPlaylistList);
+  const { data, isFetched } = useQuery('playlistList', getPlaylistList)
   return (
     <main className="page-block">
       <section className="playlistList" aria-labelledby="region1">
@@ -19,7 +19,7 @@ function Home() {
           {isFetched ? (
             data.items.map(({ images, id, name }) => (
               <PlaylistItemB
-                image={images[0].url}
+                image={images[0]?.url}
                 id={id}
                 name={name}
                 key={id}
@@ -867,7 +867,7 @@ function Home() {
         </div>
       </section>
     </main>
-  );
+  )
 }
 
-export default withLogging(Home);
+export default withLogging(Home)
