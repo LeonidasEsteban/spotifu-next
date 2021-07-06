@@ -19,7 +19,7 @@ export default function Playlist() {
   const { data: tracks, isFetched } = useQuery(router.query.id, () => getPlaylistTracks(playlistId))
   console.log(tracks)
   return (
-    <Base>
+    <>
       <Head>
         <title>{playlist?.name}</title>
       </Head>
@@ -49,7 +49,7 @@ export default function Playlist() {
             : 'cargando...'
         }
       </PlaylistTable>
-    </Base>
+    </>
   )
 }
 

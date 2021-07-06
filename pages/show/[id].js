@@ -15,7 +15,7 @@ export default function Playlist() {
   const showId = router.query.id;
   const { data: show, isFetched } = useQuery(router.query.id, () => getShow(showId))
   return (
-    <Base>
+    <>
       <Head>
         <title>{show?.name}</title>
       </Head>
@@ -43,7 +43,7 @@ export default function Playlist() {
             : 'cargando...'
         }
       </PlaylistTable>
-    </Base>
+    </>
   )
 }
 

@@ -1,4 +1,4 @@
-import React, {useContext, useRef, useEffect, useState } from 'react'
+import React, {useContext, useRef, useEffect, useState, memo } from 'react'
 import { TrackContext } from '../pages/_app'
 import timeFormater from '../utils/time-formater'
 import Slider from './slider'
@@ -32,7 +32,7 @@ function usePlaylist(type, id) {
   }
 }
 
-export default function Footer() {
+function Footer() {
   const track = useContext(TrackContext)
   if (!track?.value) return null
   const { playlist, audioSrc, items } = usePlaylist(track.value.type, track.value.id)
@@ -42,8 +42,9 @@ export default function Footer() {
   const [progressTime, setProgressTime] = useState(timeFormater(0))
   const [progressPercentage, setProgressPercentage] = useState('0%')
   const [duration, setDuration] = useState(timeFormater(0))
-
+  console.log(audio_url)
   useEffect(() => {
+    console.log('efecto')
     if (audio_url) {
       audio.current = new Audio(audio_url)
       audio.current.addEventListener('play', handlePlay)
@@ -64,7 +65,7 @@ export default function Footer() {
     }
   }, [audio_url])
 
-  if (!audio_url) return null
+  // if (!audio_url) return null
 
   function handlePauseClick() {
     audio.current.pause()
@@ -177,3 +178,6 @@ export default function Footer() {
     </footer>
   )
 }
+
+
+export default memo(Footer)

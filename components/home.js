@@ -45,7 +45,7 @@ function Home() {
         <div className="playlistList-container">
           {
             showsAreFetched ? (
-              shows.items.map(({ show }) => (
+              shows?.items.map(({ show }) => (
                 <PlaylistItemA
                   key={show?.id}
                   image={show?.images[0]?.url}

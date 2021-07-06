@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { useQuery } from "react-query";
 import { getPlaylistList } from "../services/playlist";
 import Link from "next/link";
@@ -30,4 +30,4 @@ function list() {
   );
 }
 
-export default withLogging(list);
+export default withLogging(memo(list))
