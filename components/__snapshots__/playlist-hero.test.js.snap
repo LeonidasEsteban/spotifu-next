@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot PlaylistHero 1`] = `
+<DocumentFragment>
+  <div
+    class="playlistHero"
+  >
+    <img
+      alt=""
+      height="232"
+      src=""
+      width="232"
+    />
+    <div
+      class="playlistHero-content"
+    >
+      <p
+        class="playlistHero-type"
+      >
+        show
+      </p>
+      <h1
+        class="playlistHero-name"
+      >
+        Playlist de leo
+      </h1>
+      <h2
+        class="playlistHero-description"
+      >
+        Esta es un playlist bonita
+      </h2>
+    </div>
+  </div>
+</DocumentFragment>
+`;
