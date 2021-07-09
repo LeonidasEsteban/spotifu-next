@@ -65,23 +65,7 @@ function Home() {
           <h2 className="playlistList-title" id="region3">
             Otra categoría chingona
           </h2>
-          <div className="navigation">
-            <button
-              className="navigation-prev"
-              aria-label="Volver"
-              title="Volver"
-            >
-              <i className="icon-arrowLeft" aria-hidden="true"></i>
-            </button>
-            <button
-              className="navigation-next"
-              disabled
-              aria-label="Avanzar"
-              title="avanzar"
-            >
-              <i className="icon-arrowRight" aria-hidden="true"></i>
-            </button>
-          </div>
+
         </div>
         <div className="playlistList-container">
           <div className="playlistA">
