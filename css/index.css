@@ -14,6 +14,8 @@
 @import './playlist-item.css';
 @import './playlist-table.css';
 @import './artist-search.css';
+@import './login-button.css';
+@import './user.css';
 
 :root {
   font-size: 14px;

@@ -42,7 +42,7 @@ export default function Playlist(props) {
                 album={track.track.album.name}
                 key={track.track.id}
                 date={track.added_at}
-                index={index + 1}
+                index={index}
                 groupId={playlist.id}
                 type="music"
               />
@@ -67,8 +67,7 @@ const withSession = getServerSideProps => (ctx) => {
   return getServerSideProps(ctx)
 }
 
-export const getServerSideProps = withSession(async ({ req, res }) => {
-
+export const getServerSideProps = withSession(() => {
   return {
     props: {},
   }

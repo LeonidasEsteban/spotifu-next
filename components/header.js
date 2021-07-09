@@ -1,8 +1,11 @@
 import React from 'react'
 import Navigation from './navigation'
-import Link from 'next/link'
+import LoginButton from './login-button'
+import User from './user'
+import useSession from '../hooks/use-session'
 
 export default function header({ children }) {
+  const {isLogged, isLoading } = useSession()
   return (
     <div className="sticky">
       <div className="page-block">
@@ -11,9 +14,13 @@ export default function header({ children }) {
             <Navigation />
             {children}
           </div>
-          <div>
-            <Link href="/api/login">Login</Link>
-          </div>
+          {
+            !isLoading && isLogged ? (
+              <User />
+            ) : (
+              <LoginButton />
+            )
+          }
         </header>
       </div>
     </div>

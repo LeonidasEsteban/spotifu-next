@@ -37,7 +37,7 @@ export default function Playlist() {
                 type="show"
                 groupId={show?.id}
                 key={track.id}
-                index={index + 1}
+                index={index}
               />
             ))
             : 'cargando...'

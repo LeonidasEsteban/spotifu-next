@@ -19,6 +19,11 @@
 .playlistItem-index {
   inline-size: 30px;
   text-align: end;
+  counter-increment: track;
+}
+
+.playlistItem-index:before {
+  content: counter(track);
 }
 
 .playlistItem-description {

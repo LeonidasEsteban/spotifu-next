@@ -1,5 +1,6 @@
 .playlistTable {
   padding-block: 1.5rem;
+  counter-reset: track;
 }
 
 .playlistTable-head {

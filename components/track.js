@@ -13,7 +13,7 @@ export default function track({id, groupId, type, name, image, artist, date, alb
   {
     return preview_url ? (
       <div className="playlistItem" onClick={handleClick}>
-        <span className="playlistItem-index">{index}</span>
+        <span className="playlistItem-index"></span>
         <div className="playlistItem-title">
           <img src={image} width="40" height="40" alt="" />
           <div className="playlistItem-description">

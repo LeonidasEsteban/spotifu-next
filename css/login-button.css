@@ -1,0 +1,8 @@
+.loginButton {
+  background: var(--white);
+  text-transform: uppercase;
+  font: var(--baseFont);
+  padding: .5rem 2rem;
+  border-radius: 1.5rem;
+  font-weight: bold;
+}
