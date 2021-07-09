@@ -1,9 +1,9 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import '@testing-library/jest-dom/extend-expect'
 import { renderHook } from '@testing-library/react-hooks'
 import List from './list.js'
 import nock from 'nock'
+import { QueryClient, QueryClientProvider, useQuery } from 'react-query'
 
 const data = {
   "href": "https://api.spotify.com/v1/users/1282564740/playlists?offset=0&limit=20",
@@ -70,9 +70,27 @@ const expectation = nock('https://api.spotify.com/v1/')
 
 test('List',  () => {
   render(<List />)
-  expect(screen.getByText(/Playlist/i)).toBeInTheDocument()
+  expect(screen.getByText(/Cargando/i)).toBeInTheDocument()
 })
 
+// export function useCustomHook() {
+//   return useQuery('customHook', () => 'Hello');
+// }
+
+// const queryClient = new QueryClient();
+// const wrapper = ({ children }) => (
+//   <QueryClientProvider client={queryClient}>
+//     {children}
+//   </QueryClientProvider>
+// );
+
+
+// const { result, waitFor } = renderHook(() => useCustomHook(), { wrapper });
+
+
+// await waitFor(() => result.current.isSuccess);
+
+// expect(result.current.data).toEqual("Hello");
 
 
 

@@ -1,5 +1,5 @@
 import "../css/index.css";
-import { QueryClientProvider, QueryCache, QueryClient } from "react-query";
+import { QueryClientProvider, QueryClient } from "react-query";
 import { Hydrate } from "react-query/hydration";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { createContext, useState } from 'react'
