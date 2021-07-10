@@ -1,14 +1,7 @@
-import { BASE_API } from "../constants";
-import Cookies from "universal-cookie";
 
-const cookies = new Cookies();
+import baseAPIFetch from '../utils/handle-promise'
+
 
 export async function getAlbums() {
-  const response = await fetch(`${BASE_API}albums`, {
-    headers: {
-      Authorization: cookies.get("token"),
-    },
-  });
-  const data = response.json();
-  return data;
+  return baseAPIFetch('albums')
 }

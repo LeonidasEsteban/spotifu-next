@@ -24,7 +24,7 @@ function usePlaylist(type, id) {
       }
     default:
       return {
-        playlist: useQuery(id, () => getShow(id)),
+        playlist: useQuery(id, () => getPlaylist(id)),
         items: 'episodes',
         audioSrc: 'audio_preview_url',
       }
