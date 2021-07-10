@@ -1,5 +1,5 @@
 import React from 'react'
-import Link from 'next/Link'
+import Link from 'next/link'
 
 export default function PlaylistItemA({ type, image, name, description, id }) {
   return (
